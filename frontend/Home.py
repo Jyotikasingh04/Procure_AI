@@ -171,7 +171,7 @@ with st.container(border=True):
         inner_col1, inner_col2 = st.columns(2)
         with inner_col1:
             if st.button("Login", type="primary", use_container_width=True):
-                st.switch_page("pages/Login.py")
+                st.switch_page("pages/login.py")
         with inner_col2:
             if st.button("Register", use_container_width=True):
                 st.switch_page("pages/Register.py")
