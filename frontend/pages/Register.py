@@ -210,7 +210,7 @@ with center:
                 else:
                     if response.status_code == 200:
                         st.success("Registration successful. Redirecting to login...")
-                        st.switch_page("pages/Login.py")
+                        st.switch_page("pages/login.py")
                     else:
                         st.error(response.text)
 
