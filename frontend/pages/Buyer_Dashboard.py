@@ -137,7 +137,7 @@ with title_col:
 with action_col:
     st.write("")
     if st.button("+ Create Auction", use_container_width=True):
-        st.switch_page("pages/Create_Auction.py")
+        st.switch_page("pages/create_auction.py")
 
 st.divider()
 
