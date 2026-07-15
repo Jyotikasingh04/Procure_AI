@@ -9,7 +9,7 @@ import streamlit as st
 import requests
 from datetime import datetime
 
-API_BASE_URL = "http://127.0.0.1:8000"
+API_BASE_URL = "https://procure-ai-3lfy.onrender.com"
 
 st.set_page_config(page_title="Create Auction", layout="centered")
 
