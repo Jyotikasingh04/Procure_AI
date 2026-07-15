@@ -224,4 +224,4 @@ with center:
     st.divider()
 
     if st.button("Login", use_container_width=True):
-        st.switch_page("pages/Login.py")
+        st.switch_page("pages/login.py")
