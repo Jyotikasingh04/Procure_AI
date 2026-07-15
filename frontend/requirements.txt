@@ -1,0 +1,4 @@
+streamlit
+requests
+python-jose[cryptography]
+streamlit-autorefresh
