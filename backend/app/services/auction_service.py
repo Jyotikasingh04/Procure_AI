@@ -99,7 +99,11 @@ def start_auction(db: Session, auction_id: uuid.UUID, buyer_company_id: uuid.UUI
     """
     Move an auction from DRAFT to LIVE. Only the buyer company that
     created the auction may start it, and only while it's still DRAFT.
-    start_time, end_time, and winner_company_id are never touched here.
+
+    start_time is reset to the moment the auction is actually started,
+    and end_time is recomputed by preserving the original duration
+    (original end_time - original start_time) that was chosen at
+    creation time. winner_company_id is never touched here.
 
     After the transition commits, every APPROVED vendor company is
     emailed a live-auction notification. Email delivery failures are
@@ -125,6 +129,18 @@ def start_auction(db: Session, auction_id: uuid.UUID, buyer_company_id: uuid.UUI
             detail="Only a DRAFT auction can be started.",
         )
 
+    original_start_time = auction.start_time
+    original_end_time = auction.end_time
+    if original_start_time.tzinfo is None:
+        original_start_time = original_start_time.replace(tzinfo=timezone.utc)
+    if original_end_time.tzinfo is None:
+        original_end_time = original_end_time.replace(tzinfo=timezone.utc)
+
+    duration = original_end_time - original_start_time
+
+    new_start_time = datetime.now(timezone.utc)
+    auction.start_time = new_start_time
+    auction.end_time = new_start_time + duration
     auction.status = AuctionStatus.LIVE
 
     try:
